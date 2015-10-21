@@ -10,6 +10,13 @@ class Plugin extends PluginBase
 {
 
     /**
+     * @var array Plugin dependencies
+     */
+    public $require = [
+        'RtlWeb.Rtler'
+    ];
+
+    /**
      * Returns information about this plugin.
      *
      * @return array
