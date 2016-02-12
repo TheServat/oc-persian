@@ -23,7 +23,7 @@ class CmsPage extends CmsCompoundObject
 
     protected $settingsValidationRules = [
         'title' => 'required',
-        'url'   => ['required', 'regex:/^\/[۰-۹آا-یa-z0-9\/\:_\-\*\[\]\+\?\|\.\^\\\$]*$/i']
+        'url'   => ['required', 'regex:/^\/[۰-۹آا-یa-z0-9\/\:_\-\*\[\]\+\?\|\.\^\\\$]*$/iu']
     ];
 
     /**

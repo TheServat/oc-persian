@@ -40,7 +40,7 @@ class RainLabPage extends Content
 
     protected $viewBagValidationRules = [
         'title' => 'required',
-        'url'   => ['required', 'regex:/^\/[۰-۹آا-یa-z0-9\/_\-]*$/i', 'uniqueUrl']
+        'url'   => ['required', 'regex:/^\/[۰-۹آا-یa-z0-9\/_\-]*$/iu', 'uniqueUrl']
     ];
 
     /**
