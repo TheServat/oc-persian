@@ -12,7 +12,7 @@ class Model extends baseModel{
         {
             return Carbon::createFromTimestamp($value);
         }
-
+        
         // If the value is in simply year, month, day format, we will instantiate the
         // Carbon instances from that format. Again, this provides for simple date
         // fields on the database, while still supporting Carbonized conversion.
@@ -20,16 +20,14 @@ class Model extends baseModel{
         {
             return Carbon::createFromFormat('Y-m-d', $value)->startOfDay();
         }
-
         // Finally, we will just assume this date is in the format used by default on
         // the database connection and use that format to create the Carbon object
         // that is returned back out to the developers after we convert it here.
-        elseif ( ! $value instanceof \DateTime)
+        elseif ( $value instanceof \DateTime)
         {
             $format = $this->getDateFormat();
             return Carbon::createFromFormat($format, $value);
         }
-
         return Carbon::instance($value);
     }
 }

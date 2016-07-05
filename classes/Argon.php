@@ -1,22 +1,17 @@
-<?php
+<?php namespace RtlWeb\Persian\Classes;
+use Jenssegers\Date\Date as DateBase;
+
 /**
- * Created by PhpStorm.
- * User: Sajjad
- * Date: 7/24/2015
- * Time: 2:22 AM
+ * Persian Argon class.
  */
-
-namespace RtlWeb\Persian\Classes;
-use \Carbon\Carbon as baseCarbon;
-
-class Carbon extends baseCarbon
+class Argon extends DateBase
 {
     /**
      * Format to use for __toString method when type juggling occurs.
      *
      * @var string
      */
-    protected static $toStringFormat = 'H:i:s d-m-Y';
+//    protected static $toStringFormat = 'H:i:s d-m-Y';
 
     /**
      * Returns date formatted according to given format.
@@ -26,7 +21,7 @@ class Carbon extends baseCarbon
      */
     public function format($format)
     {
-        return jDateTime::date($format,$this->getTimestamp());
+        return parent::format(jDateTime::date($format,$this->getTimestamp()));
     }
 
     /**
@@ -38,5 +33,4 @@ class Carbon extends baseCarbon
     {
         return $this->format('D, j F, Y g:i A');
     }
-
 }
