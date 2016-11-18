@@ -1,11 +1,12 @@
 @font-face {
     font-family: 'yekan';
-    src: url('../fonts/YekanWeb-Regular.woff') format('woff'),url('../fonts/YekanWeb-Regular.ttf') format('truetype');
+    src: url('../fonts/YekanWeb-Regular.woff') format('woff'), url('../fonts/YekanWeb-Regular.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
     unicode-range: U+0600 –06FF;
 }
 
-html, body {
+html,
+body {
     font-family: 'yekan' !important;
 }

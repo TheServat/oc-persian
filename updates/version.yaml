@@ -2,3 +2,4 @@
 1.0.2: Now urls support persian
 1.0.3: Fix Regex Pattern
 1.1.1: update to october cms build 346
+1.2.1: hot fix datepicker is gregorian but it will be fix soon

@@ -1,0 +1,5 @@
+{
+    "require": {
+        "vsg24/easydatetime": "^1.0"
+    }
+}

@@ -1,50 +1,9 @@
-<?php
-namespace RtlWeb\Persian\Classes;
-use DateTime;
+<?php namespace RtlWeb\Persian\Classes;
+
+use DateTime as PhpDateTime;
 use DateTimeZone;
-/**
- * Jalali (Shamsi) DateTime Class. Supports years higher than 2038.
- *
- * Copyright (c) 2012 Sallar Kaboli <sallar.kaboli@gmail.com>
- * http://sallar.me
- *
- * The MIT License (MIT)
- *
- * Permission is hereby granted, free of charge, to any person obtaining a
- * copy of this software and associated documentation files (the "Software"),
- * to deal in the Software without restriction, including without limitation
- * the rights to use, copy, modify, merge, publish, distribute, sublicense,
- * and/or sell copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following conditions:
- *
- * 1- The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * 2- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
- * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
- * Original Jalali to Gregorian (and vice versa) convertor:
- * Copyright (C) 2000  Roozbeh Pournader and Mohammad Toossi
- *
- * List of supported timezones can be found here:
- * http://www.php.net/manual/en/timezones.php
- *
- *
- * @package    jDateTime
- * @author     Sallar Kaboli <sallar.kaboli@gmail.com>
- * @author     Omid Pilevar <omid.pixel@gmail.com>
- * @copyright  2003-2012 Sallar Kaboli
- * @license    http://opensource.org/licenses/mit-license.php The MIT License
- * @link       https://github.com/sallar/jDateTime
- * @see        DateTime
- * @version    2.2.0
- */
-class jDateTime
+
+class JalaliDate
 {
     /**
      * Defaults
@@ -54,11 +13,11 @@ class jDateTime
     private static $timezone = null; //Timezone String e.g Asia/Tehran, Defaults to Server Timezone Settings
     private static $temp = array();
     /**
-     * jDateTime::Constructor
+     * JalaliDate::Constructor
      *
      * Pass these parameteres when creating a new instance
      * of this Class, and they will be used as defaults.
-     * e.g $obj = new jDateTime(false, true, 'Asia/Tehran');
+     * e.g $obj = new JalaliDate(false, true, 'Asia/Tehran');
      * To use system defaults pass null for each one or just
      * create the object without any parameters.
      *
@@ -74,7 +33,7 @@ class jDateTime
         if ( $timezone !== null ) self::$timezone = $timezone;
     }
     /**
-     * jDateTime::Date
+     * JalaliDate::Date
      *
      * Formats and returns given timestamp just like php's
      * built in date() function.
@@ -95,7 +54,7 @@ class jDateTime
         //Timestamp + Timezone
         $stamp    = ($stamp !== false) ? $stamp : time();
         $timezone = ($timezone != null) ? $timezone : ((self::$timezone != null) ? self::$timezone : date_default_timezone_get());
-        $obj      = new DateTime('@' . $stamp, new DateTimeZone($timezone));
+        $obj      = new PhpDateTime('@' . $stamp, new DateTimeZone($timezone));
         $obj->setTimezone(new DateTimeZone($timezone));
         if ( (self::$jalali === false && $jalali === null) || $jalali === false ) {
             return $obj->format($format);
@@ -178,7 +137,7 @@ class jDateTime
                         break;
                     //Year
                     case 'L':
-                        $tmpObj = new DateTime('@'.(time()-31536000));
+                        $tmpObj = new PhpDateTime('@'.(time()-31536000));
                         $v = $tmpObj->format('L');
                         break;
                     case 'o':
@@ -228,9 +187,9 @@ class jDateTime
         }
     }
     /**
-     * jDateTime::gDate
+     * JalaliDate::gDate
      *
-     * Same as jDateTime::Date method
+     * Same as JalaliDate::Date method
      * but this one works as a helper and returns Gregorian Date
      * in case someone doesn't like to pass all those false arguments
      * to Date method.
@@ -251,7 +210,7 @@ class jDateTime
     }
 
     /**
-     * jDateTime::Strftime
+     * JalaliDate::Strftime
      *
      * Format a local time/date according to locale settings
      * built in strftime() function.
@@ -295,7 +254,7 @@ class jDateTime
     }
 
     /**
-     * jDateTime::Mktime
+     * JalaliDate::Mktime
      *
      * Creates a Unix Timestamp (Epoch Time) based on given parameters
      * works like php's built in mktime() function.
@@ -332,17 +291,17 @@ class jDateTime
         //Create a new object and set the timezone if available
         $date = $year.'-'.sprintf('%02d', $month).'-'.sprintf('%02d', $day).' '.$hour.':'.$minute.':'.$second;
         if ( self::$timezone != null || $timezone != null ) {
-            $obj = new DateTime($date, new DateTimeZone(($timezone != null) ? $timezone : self::$timezone));
+            $obj = new PhpDateTime($date, new DateTimeZone(($timezone != null) ? $timezone : self::$timezone));
         }
         else {
-            $obj = new DateTime($date);
+            $obj = new PhpDateTime($date);
         }
         //Return
         return $obj->format('U');
     }
 
     /**
-     * jDateTime::Checkdate
+     * JalaliDate::Checkdate
      *
      * Checks the validity of the date formed by the arguments.
      * A date is considered valid if each parameter is properly defined.

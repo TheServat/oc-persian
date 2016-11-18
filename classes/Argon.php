@@ -1,4 +1,5 @@
 <?php namespace RtlWeb\Persian\Classes;
+
 use Jenssegers\Date\Date as DateBase;
 
 /**
@@ -6,6 +7,16 @@ use Jenssegers\Date\Date as DateBase;
  */
 class Argon extends DateBase
 {
+    public $eDateTime;
+
+    public static  $jalali = true;
+
+    public function __construct($time = null, $tz = null)
+    {        
+        $a = parent::__construct($time, $tz);
+        $this->eDateTime = new \EasyDateTime($this->tzName, 'jalali');
+        return $a;
+    }
     /**
      * Format to use for __toString method when type juggling occurs.
      *
@@ -21,7 +32,13 @@ class Argon extends DateBase
      */
     public function format($format)
     {
-        return parent::format(jDateTime::date($format,$this->getTimestamp()));
+        if(self::$jalali == false){
+            // dd(self::$jalali);
+        }
+        if(self::$jalali === true){
+            return $this->eDateTime->date($format,$this->getTimeStamp());
+        }
+        return parent::format($format);
     }
 
     /**

@@ -1,9 +1,9 @@
-+function ($) {
++function($) {
     var removeList = [
         "a", "an", "as", "at", "before", "but", "by", "for", "from", "is",
         "in", "into", "like", "of", "off", "on", "onto", "per", "since",
-        "than", "the", "this", "that", "to", "up", "via", "with",'از','به',
-        'در','با','یا','یک','قبل','است','بالا','پایین','این','آن'
+        "than", "the", "this", "that", "to", "up", "via", "with", 'از', 'به',
+        'در', 'با', 'یا', 'یک', 'قبل', 'است', 'بالا', 'پایین', 'این', 'آن'
     ]
     var InputPreset = $.fn.inputPreset.Constructor
 
@@ -18,9 +18,9 @@
     }
 
     var oldFormatValue = InputPreset.prototype.formatValue;
-    InputPreset.prototype.formatValue = function () {
+    InputPreset.prototype.formatValue = function() {
         if (this.options.inputPresetType == 'namespace' || this.options.inputPresetType == 'camel'
-            || this.options.inputPresetType == 'file' ) {
+            || this.options.inputPresetType == 'file') {
             return oldFormatValue.call(this);
         }
         var value = slugify(this.$src.val())
@@ -31,4 +31,4 @@
 
         return value.replace(/\s/gi, "-")
     }
-}(jQuery);
+} (jQuery);

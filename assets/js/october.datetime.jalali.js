@@ -27,38 +27,37 @@
  *
  */
 moment.loadPersian()
-+function ($) { "use strict";
-    var DateTimeConverter = $.fn.dateTimeConverter.Constructor
-    var toEnglishDigits = function (str) {
-        var charCodeZero = '۰'.charCodeAt(0);
-        return (str.replace(/[۰-۹]/g, function (w) {
-            return w.charCodeAt(0) - charCodeZero
-        }))
-    }
-    DateTimeConverter.prototype.getDateTimeValue = function() {
-        this.datetime = this.$el.attr('datetime')
-        var momentObj = moment(moment.tz(moment(this.datetime , 'jYYYY-jMM-jDD HH:mm:ss'), this.appTimezone)),
-            result
-console.log(momentObj)
-console.log(moment(momentObj))
-        if (this.options.locale) {
-            momentObj = momentObj.locale(this.options.locale)
+    + function ($) {
+        "use strict";
+        var DateTimeConverter = $.fn.dateTimeConverter.Constructor
+        var toEnglishDigits = function (str) {
+            var charCodeZero = '۰'.charCodeAt(0);
+            return (str.replace(/[۰-۹]/g, function (w) {
+                return w.charCodeAt(0) - charCodeZero
+            }))
         }
+        DateTimeConverter.prototype.getDateTimeValue = function () {
+            this.datetime = this.$el.attr('datetime')
+            var momentObj = moment(moment.tz(moment(this.datetime, 'jYYYY-jMM-jDD HH:mm:ss'), this.appTimezone)),
+                result
+            if (this.options.locale) {
+                momentObj = momentObj.locale(this.options.locale)
+            }
 
-        if (this.options.timezone) {
-            momentObj = momentObj.tz(this.options.timezone)
-        }
+            if (this.options.timezone) {
+                momentObj = momentObj.tz(this.options.timezone)
+            }
 
-        if (this.options.timeSince) {
-            result = momentObj.fromNow()
-        }
-        else if (this.options.timeTense) {
-            result = momentObj.calendar()
-        }
-        else {
-            result = momentObj.format(this.options.format)
-        }
+            if (this.options.timeSince) {
+                result = momentObj.fromNow()
+            }
+            else if (this.options.timeTense) {
+                result = momentObj.calendar()
+            }
+            else {
+                result = momentObj.format(this.options.format)
+            }
 
-        return result
-    }
-}(window.jQuery);
+            return result
+        }
+    } (window.jQuery);
